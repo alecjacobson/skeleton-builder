@@ -1,0 +1,32 @@
+cmake_minimum_required(VERSION 2.8.6)
+project(skeleton_builder)
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+
+### libIGL options: choose between header only and compiled static library
+option(LIBIGL_USE_STATIC_LIBRARY     "Use libigl as static library" OFF)
+option(LIBIGL_WITH_ANTTWEAKBAR       "Use AntTweakBar"    ON)
+option(LIBIGL_WITH_CGAL              "Use CGAL"           OFF)
+option(LIBIGL_WITH_COMISO            "Use CoMiso"         OFF)
+option(LIBIGL_WITH_CORK              "Use Cork"           OFF)
+option(LIBIGL_WITH_EMBREE            "Use Embree"         OFF)
+option(LIBIGL_WITH_LIM               "Use LIM"            OFF)
+option(LIBIGL_WITH_MATLAB            "Use Matlab"         OFF)
+option(LIBIGL_WITH_MOSEK             "Use MOSEK"          OFF)
+option(LIBIGL_WITH_OPENGL            "Use OpenGL"         ON)
+option(LIBIGL_WITH_OPENGL_GLFW       "Use GLFW"           OFF)
+option(LIBIGL_WITH_OPENGL_GLFW_IMGUI "Use ImGui"          OFF)
+option(LIBIGL_WITH_PNG               "Use PNG"            OFF)
+option(LIBIGL_WITH_TETGEN            "Use Tetgen"         OFF)
+option(LIBIGL_WITH_TRIANGLE          "Use Triangle"       OFF)
+option(LIBIGL_WITH_VIEWER            "Use OpenGL viewer"  OFF)
+option(LIBIGL_WITH_XML               "Use XML"            OFF)
+option(LIBIGL_WITH_PYTHON            "Use Python"         OFF)
+
+find_package(LIBIGL REQUIRED QUIET)
+find_package(GLUT REQUIRED)
+
+include_directories( ${GLUT_INCLUDE_DIRS} )
+add_executable(${PROJECT_NAME} "main.cpp" )
+target_link_libraries(${PROJECT_NAME} 
+  igl::core igl::opengl )
+target_link_libraries(${PROJECT_NAME} ${GLUT_LIBRARY} )
